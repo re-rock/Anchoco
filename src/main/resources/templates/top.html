@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Anchoco</title>
+</head>
+<body>
+<h1>Anchoco</h1>
+
+<h2>Recent messages from top.html</h2>
+
+<dl>
+    <th:block th:each="message : ${messages}">
+        <dt>
+            <span class="name" th:text="${message.name}" th:attr="title=${message.remoteAddr}">John Doe</span>
+            <small th:text="${#dates.format(message.createdAt, '(yyyy-MM-dd HH:mm:ss)')}">(1970-01-01 00:00:00)</small>
+        </dt>
+        <dd th:text="${message.text}">Lorem ipsum dolor sit amet</dd>
+    </th:block>
+</dl>
+
+</body>
+</html>
