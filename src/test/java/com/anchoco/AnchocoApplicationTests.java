@@ -1,4 +1,4 @@
-package com.anchoco.anchoco;
+package com.anchoco;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

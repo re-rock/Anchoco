@@ -1,13 +1,13 @@
-package com.anchoco.anchoco;
+package com.anchoco;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class TopController {
+public class LoginController {
 	
-	@GetMapping("/top")
+	@GetMapping("/login")
     public Model messages(Model model) {
 		
 		String message = "勉強しましょう！";
