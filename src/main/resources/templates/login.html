@@ -5,39 +5,53 @@
 <title>Anchoco</title>
 <style>
 /* base ----------------------------------------------------*/
-*{
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
+* {
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
 }
+
 html {
-  font-size: 87.5%;
-  font-family: "Roboto","ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
-  line-height: 1.6;
-  letter-spacing: .05em;
+	font-size: 87.5%;
+	font-family: "Roboto", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro",
+		Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+	line-height: 1.6;
+	letter-spacing: .05em;
 }
+
 body {
-  font-size: 14px;
-  font-size: 1rem;
+	font-size: 14px;
+	font-size: 1rem;
 }
-h2{
-  font-weight:normal;
+
+h2 {
+	font-weight: normal;
 }
-h3{
-  font-weight:normal;
-  margin-top: 0;
+
+h3 {
+	font-weight: normal;
+	margin-top: 0;
 }
-.container{
-  width: 80%;
-  margin: 0 auto;
-  max-width: 712px;
-  min-width: 350px;
+
+.container {
+	width: 80%;
+	margin: 0 auto;
+	max-width: 712px;
+	min-width: 350px;
 }
+
 .title {
-	 margin: 0 auto;
-	 text-align: center;
-	  margin-top: 50px;
+	margin: 0 auto;
+	text-align: center;
+	margin-top: 50px;
 }
+
 .paypal-button {
+	display: block;
+	margin: 0 auto;
+	text-align: center;
+	margin-top: 50px;
+}
+.test{
 	margin: 0 auto;
 	text-align: center;
 	margin-top: 50px;
@@ -45,38 +59,15 @@ h3{
 </style>
 </head>
 <body>
-<div class="container">
+	<div class="container">
 
-<h1 id="title" class="title">Anchoco</h1>
+		<h1 id="title" class="title">Anchoco</h1>
 
-<div id="paypal-button" class="paypal-button"></div>
+		<button class="paypal-button" type="button" name="paypal" value="paypal">
+			自動決済承認
+		</button>
 
-</div>
 
-<script src="https://www.paypalobjects.com/api/checkout.js"></script>
-<script>
-paypal.Button.render({
-  env: 'sandbox',
-  client: {
-    sandbox: 'demo_sandbox_client_id'
-  },
-  payment: function (data, actions) {
-    return actions.payment.create({
-      transactions: [{
-        amount: {
-          total: '0.01',
-          currency: 'USD'
-        }
-      }]
-    });
-  },
-  onAuthorize: function (data, actions) {
-    return actions.payment.execute()
-      .then(function () {
-        window.alert('Thank you for your purchase!');
-      });
-  }
-}, '#paypal-button');
-</script>
+	</div>
 </body>
 </html>
