@@ -1,0 +1,295 @@
+<html>
+  <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Checkout with PayPal Demo</title>
+      <!--Including Bootstrap style files-->
+      <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+	  <script src="//www.paypalobjects.com/api/checkout.js" ></script>
+ 	<script src="https://code.jquery.com/jquery.js"></script>
+ 	
+
+      <style>
+          /* http://angrytools.com/gradient/ */
+          .bg-color {
+              color: white;
+              background: -moz-linear-gradient(0deg, #004094 0%, #0096D9 50%, #004094 100%); /* ff3.6+ */
+              background: -webkit-gradient(linear, left top, right top, color-stop(0%, #004094), color-stop(50%, #0096D9), color-stop(100%, #004094)); /* safari4+,chrome */
+              background: -webkit-linear-gradient(0deg, #004094 0%, #0096D9 50%, #004094 100%); /* safari5.1+,chrome10+ */
+              background: -o-linear-gradient(0deg, #004094 0%, #0096D9 50%, #004094 100%); /* opera 11.10+ */
+              background: -ms-linear-gradient(0deg, #004094 0%, #0096D9 50%, #004094 100%); /* ie10+ */
+              background: linear-gradient(90deg, #004094 0%, #0096D9 50%, #004094 100%); /* w3c */
+              filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#004094', endColorstr='#004094',GradientType=1 ); /* ie6-9 */
+          }
+          .mark{
+              max-width: 45%;
+          }
+          .mark-input-field{
+              height:30px !important;
+          }
+      </style>
+  </head>
+  <body class="container-fluid">
+     
+      <div class="well bg-color">
+          <h2 class="text-center">Checkout with PayPal Demo</h2>
+          <h4 class="text-center">NVP API with Checkout.js v4</h4>
+      </div>
+      <div class="container" id="normal-flow">
+      <div class="row">
+      	<div class="col-md-3">
+      		 
+             <!--Demo Product details -->
+             <table>
+             <tr><h3> DIGITAL SLR CAMERA </h3></tr>
+             <tr><img src="img/camera.jpg" width="300" height="250" class="img-responsive"/></tr>
+             <tr><td><p class="lead"> Buyer Credentials:</p></td></tr>
+             <tr><td>Email-id:&nbsp;&nbsp;&nbsp;<input type="text" id="buyer_email" class="form-control" name="buyer_email" readonly/> </td></tr>
+             <tr><td>Password:<input type="text" id="buyer_password" class="form-control" name="buyer_password" readonly/></td></tr>
+             </table>
+           </div>
+	   	<div class="col-md-4">
+	                      <p class="lead"> Item Specifications:</p>
+	                      <form class="form-group" action="/address" method="get" >
+	                      <table class="table">
+	                       
+								<tr>
+									<td>Item Name:</td>
+									<td><input type="text" name="L_PAYMENTREQUEST_0_NAME0"
+										id="L_PAYMENTREQUEST_0_NAME0" value="DSLR Camera" readonly /></td>
+								</tr>
+								<tr>
+									<td>Item ID:</td>
+									<td><input type="text" name="L_PAYMENTREQUEST_0_NUMBER0"
+										id="L_PAYMENTREQUEST_0_NUMBER0" value="A0123" readonly /></td>
+								</tr>
+								<tr>
+									<td>Description:</td>
+									<td><input type="text" name="L_PAYMENTREQUEST_0_DESC0"
+										value="Autofocus Camera" readonly /></td>
+								</tr>
+								<tr>
+									<td>Quantity:</td>
+									<td><input type="text" name="L_PAYMENTREQUEST_0_QTY0"
+										id="L_PAYMENTREQUEST_0_QTY0" value="1" readonly /></td>
+								</tr>
+								<tr>
+									<td>Price:</td>
+									<td><input type="text" name="PAYMENTREQUEST_0_ITEMAMT"
+										id="PAYMENTREQUEST_0_ITEMAMT" value="10.00" readonly /></td>
+								</tr>
+								<tr>
+									<td>Tax:</td>
+									<td><input type="text" name="PAYMENTREQUEST_0_TAXAMT"
+										id="PAYMENTREQUEST_0_TAXAMT" value="2" readonly /></td>
+								</tr>
+								<tr>
+									<td>Shipping Amount:</td>
+									<td><input type="text" name="PAYMENTREQUEST_0_SHIPPINGAMT"
+										id="PAYMENTREQUEST_0_SHIPPINGAMT" value="5" readonly /></td>
+								</tr>
+								<tr>
+									<td>Handling Amount:</td>
+									<td><input type="text" name="PAYMENTREQUEST_0_HANDLINGAMT"
+										id="PAYMENTREQUEST_0_HANDLINGAMT" value="1" readonly /></td>
+								</tr>
+								<tr>
+									<td>Shipping Discount:</td>
+									<td><input type="text" name="PAYMENTREQUEST_0_SHIPDISCAMT"
+										id="PAYMENTREQUEST_0_SHIPDISCAMT" value="-3" readonly /></td>
+								</tr>
+								<tr>
+									<td>Insurance Amount:</td>
+									<td><input type="text"
+										name="PAYMENTREQUEST_0_INSURANCEAMT"
+										id="PAYMENTREQUEST_0_INSURANCEAMT" value="2" readonly /></td>
+								</tr>
+								<tr>
+									<td>Total Amount:</td>
+									<td><input type="text" name="PAYMENTREQUEST_0_AMT"
+										id="PAYMENTREQUEST_0_AMT" value="17" readonly /></td>
+								</tr>
+								<tr>
+									<td><input type="hidden" name="LOGOIMG"
+										value="http://10.37.90.190/demoportaldev/demo/img/logo.jpg" /></td>
+								</tr>
+								<tr>
+									<td>Currency Code:</td>
+									<td><select name="currencyCodeType" id="currencyCodeType"
+										readonly>
+											<option value="USD" selected>USD</option>
+											<br></td>
+								</tr>
+								<tr>
+									<td>Payment Type:</td>
+									<td><input type="text" name="paymentType" value="Sale"
+										readonly /><br></td>
+								</tr>
+
+								<tr>
+									<td><div id="paypal-button-container"></div></td>
+								</tr>
+								<tr>
+									<td><input type="Submit" alt="ProceedtoCheckout"
+										class="btn btn-primary btn-large" value="ProceedtoCheckout"
+										name="checkout" /></td>
+								</tr>
+						<tr></tr>
+						<tr><td ></td></tr>
+						</table>
+						</form>
+	   </div>
+		<div class="col-md-5">
+			   <div class="row-fluid">
+			         <div class="span12 inner-span">
+			               <h4 > README: </h4>
+			               <p>
+			                  1) Click on ‘Checkout with PayPal’ button and see the experience.
+			                  <br>
+			                  2) If you get any Firewall warning, add rule to the Firewall to allow incoming connections for your application.
+			                  <br>
+			                  3) Checkout with PayPal using a buyer sandbox account provided on this page. And you're done! Or you can use Proceed to Checkout for Express Checkout Mark flow.
+			                  <br>
+			                  4) The sample code uses default sandbox credentials which are set in 'config.properties'. You can create your own credentials by creating PayPal Seller and Buyer accounts on Sandbox  <i><a href="https://developer.paypal.com/webapps/developer/applications/accounts/create" target="_blank">here</a></i>.
+			                  <br>
+			                  5) Make following changes in 'config.properties':<br>
+			                  - If using your own Sandbox seller account, update  USER, PWD and SIGNATURE values with your sandbox credentials<br>
+			                  - SANDBOX_FLAG: Kept true for working with Sandbox, it will be false for live.<br>
+			                  </p>
+			              
+			         		<p>For Integration follow the below link </p>
+			         		<p><a target="_blank" href="https://developer.paypal.com/docs/integration/direct/express-checkout/integration-jsv4/">https://developer.paypal.com/docs/integration/direct/express-checkout/integration-jsv4/</a></p>
+			               
+			
+			         </div>
+			      </div>
+			   </div>
+	   </div>
+	   </div>
+    
+			<script type="text/javascript">
+				function getRandomNumberInRange(min, max) {
+					return Math.floor(Math.random() * (max - min) + min);
+				}
+
+				var buyerCredentials = [ {
+					"email" : "ron@hogwarts.com",
+					"password" : "qwer1234"
+				}, {
+					"email" : "sallyjones1234@gmail.com",
+					"password" : "p@ssword1234"
+				}, {
+					"email" : "joe@boe.com",
+					"password" : "123456789"
+				}, {
+					"email" : "hermione@hogwarts.com",
+					"password" : "123456789"
+				}, {
+					"email" : "lunalovegood@hogwarts.com",
+					"password" : "123456789"
+				}, {
+					"email" : "ginnyweasley@hogwarts.com",
+					"password" : "123456789"
+				}, {
+					"email" : "bellaswan@awesome.com",
+					"password" : "qwer1234"
+				}, {
+					"email" : "edwardcullen@gmail.com",
+					"password" : "qwer1234"
+				} ];
+				var randomBuyer = getRandomNumberInRange(0,
+						buyerCredentials.length);
+
+				document.getElementById("buyer_email").value = buyerCredentials[randomBuyer].email;
+				document.getElementById("buyer_password").value = buyerCredentials[randomBuyer].password;
+			</script>
+
+
+
+			<script>
+				paypal.Button
+						.render(
+								{
+
+									env : 'sandbox', // sandbox | production
+
+									// Show the buyer a 'Pay Now' button in the checkout flow
+									commit : false,
+
+									// payment() is called when the button is clicked
+									payment : function() {
+
+										// Set up a url on your server to create the payment
+										var CREATE_URL = 'createPayment';
+
+										var data = {
+											currencycode : document
+													.getElementById("currencyCodeType").value,
+											amt : document
+													.getElementById("PAYMENTREQUEST_0_AMT").value,
+											itemamt : document
+													.getElementById("PAYMENTREQUEST_0_ITEMAMT").value,
+											name0 : document
+													.getElementById("L_PAYMENTREQUEST_0_NAME0").value,
+											number0 : document
+													.getElementById("L_PAYMENTREQUEST_0_NUMBER0").value,
+											qty0 : document
+													.getElementById("L_PAYMENTREQUEST_0_QTY0").value,
+											amt0 : document
+													.getElementById("PAYMENTREQUEST_0_ITEMAMT").value,
+											shipamt : document
+													.getElementById("PAYMENTREQUEST_0_SHIPPINGAMT").value,
+											handamt : document
+													.getElementById("PAYMENTREQUEST_0_HANDLINGAMT").value,
+											shipdiscamt : document
+													.getElementById("PAYMENTREQUEST_0_SHIPDISCAMT").value,
+											insuranceamt : document
+													.getElementById("PAYMENTREQUEST_0_INSURANCEAMT").value,
+											tax : document
+													.getElementById("PAYMENTREQUEST_0_TAXAMT").value
+										};
+
+										// Make a call to your server to set up the payment
+										return paypal.request.post(CREATE_URL, data).then(function(res) {
+													console.log(res);
+													if(res.STATUS && res.STATUS=="Failure"){
+														alert(res.MESSAGE);
+													}
+													else{
+														console.log(res.id);
+														return res.id;	
+													}
+										});
+									},
+
+									// onAuthorize() is called when the buyer approves the payment
+									onAuthorize : function(data, actions) {
+										//alert(data);
+										// Set up a url on your server to execute the payment
+										var EXECUTE_URL = 'executePayment';
+
+										// Set up the data you need to pass to your server
+										//alert(data.paymentID);
+										var param = {
+											paymentID : data.paymentToken,
+											payerID : data.payerID
+										};
+										window.location.href = "review.html?id="
+												+ encodeURIComponent(param.paymentID)
+												+ "&payerID="
+												+ encodeURIComponent(param.payerID);
+
+									},
+
+								onCancel: function(data, actions) {
+									  // Set up a url on your server to cancel the payment
+									  console.log(data);
+									  //alert("Cancelled");
+								    window.location.href = "cancel.html"
+								}
+
+								}, '#paypal-button-container');
+			</script>
+	</body>
+</html>

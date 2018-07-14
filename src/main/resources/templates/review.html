@@ -1,0 +1,201 @@
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Checkout with PayPal Demo</title>
+	<!--Including Bootstrap style files-->
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+	
+
+	<style>
+		/* http://angrytools.com/gradient/ */
+		.bg-color {
+			color: white;
+			background: -moz-linear-gradient(0deg, #004094 0%, #0096D9 50%, #004094 100%); /* ff3.6+ */
+			background: -webkit-gradient(linear, left top, right top, color-stop(0%, #004094), color-stop(50%, #0096D9), color-stop(100%, #004094)); /* safari4+,chrome */
+			background: -webkit-linear-gradient(0deg, #004094 0%, #0096D9 50%, #004094 100%); /* safari5.1+,chrome10+ */
+			background: -o-linear-gradient(0deg, #004094 0%, #0096D9 50%, #004094 100%); /* opera 11.10+ */
+			background: -ms-linear-gradient(0deg, #004094 0%, #0096D9 50%, #004094 100%); /* ie10+ */
+			background: linear-gradient(90deg, #004094 0%, #0096D9 50%, #004094 100%); /* w3c */
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#004094', endColorstr='#004094',GradientType=1 ); /* ie6-9 */
+		}
+		.mark{
+			max-width: 45%;
+		}
+		.mark-input-field{
+			height:30px !important;
+		}
+	</style>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="well bg-color">
+			<h2 class="text-center">Checkout with PayPal Demo</h2>
+			<h4 class="text-center">NVP API with Checkout.js v4</h4>
+		</div>
+		<div class="row-fluid">
+			
+			
+			<div class="span4">
+			</div>
+			<div class="span5">
+				<div class="loader" style="margin-left: 150px;">
+					<i  class="fa fa-refresh fa-spin" style="font-size:30px"></i>
+				</div>
+				<div class="loader" style="margin-top:10px; margin-left:80px">Loading transaction details ...</div>
+				<table>
+					<tbody>
+						
+						<tr><td><h4>Shipping Address</h4></td></tr>
+						<tr><td id="shipToName"></td></tr>
+						<tr><td id="shipToStreet1"></td></tr>
+						<tr><td id="shipToStreet2"></td></tr>
+						<tr><td id="shipToCity"></td></tr>
+						<tr><td id="shipToState"></td></tr>
+						<tr><td id="shipToZip"></td></tr>
+						
+						<tr><td colspan="2">&nbsp;</td></tr>
+						<tr><td colspan="2">&nbsp;</td></tr>
+						<tr><td>Total Amount:</td><td id="totalAmt"></td></tr>
+						<tr><td>Currency Code:</td><td id="currencyCode"></td></tr>
+						<tr><td>&nbsp;</td></tr>
+						<tr><td><h3>Shipping Method</h3></td></tr>
+						
+						<tr><td>Shipping methods: </td><td>
+							
+							<select name="shipping_method" id="shipping_method" style="width: 250px;" class="required-entry">
+								<optgroup label="United Parcel Service" style="font-style:normal;">
+									<option value="2.00">
+										Worldwide Expedited - $2.00</option>
+										<option value="3.00" >
+											Worldwide Express Saver - $3.00</option>
+										</optgroup>
+										<optgroup label="Flat Rate" style="font-style:normal;">
+											<option value="0.00" >
+												Fixed - $0.00</option>
+											</optgroup>
+										</select>
+										
+										<br></td></tr>
+										
+										<tr><td><input type="Submit" id="confirm" name="confirm" alt="Check out with PayPal" class="btn btn-primary btn-large" value="Pay Now"></td></tr>
+										
+									</tbody>
+									
+								</table>
+								<div id="loader" class="loader" style="display:none">
+									<i class="fa fa-refresh fa-spin" style="font-size:30px"></i>
+									Paying Now. Please Wait..
+								</div>
+								
+							</div>
+							<div class="span3">
+							</div>
+						</div> <!-- Row-Fluid ends here -->
+					</div>  <!--Container-Fluid ends here -->
+					<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+					<script src="https://code.jquery.com/jquery.js"></script>
+					<!-- Include all compiled plugins (below), or include individual files as needed -->
+					<script src="js/bootstrap.min.js"></script>
+					<script> 
+						$( document ).ready(function() {
+				$("#show_transactions").hide(); // hide the contents on load
+				function qs(key) {
+				    key = key.replace(/[*+?^$.\[\]{}()|\\\/]/g, "\\$&"); // escape RegEx meta chars
+				    var match = location.search.match(new RegExp("[?&]"+key+"=([^&]+)(&|$)"));
+				    return match && decodeURIComponent(match[1].replace(/\+/g, " "));
+				}
+				var token = qs("token");
+				var payerID = qs("payerID");
+				var urlPrams=window.location.search.substr(1);
+				function query(variable){
+					var vars = urlPrams.split('&');
+					for (var i = 0; i < vars.length; i++) {
+						var pair = vars[i].split('=');
+						if (decodeURIComponent(pair[0]) == variable) {
+							return decodeURIComponent(pair[1]);
+						}
+					}
+				}
+				var totalamt,pr_shipamt,currencycode,itemamt,qty0,amt0,handamt;
+				var shipdiscamt,insuranceamt,tax;
+				$.get( "./getTransactionDetails?"+urlPrams, function( data ) {
+					var data = JSON.parse(data);
+					console.log(data);
+					if(data.ACK=="Failure"){
+						alert(data.L_LONGMESSAGE0);
+					}
+					else{
+						$("#shipToName").html(data.PAYMENTREQUEST_0_SHIPTONAME);
+						$("#shipToStreet1").html(data.PAYMENTREQUEST_0_SHIPTOSTREET);
+						$("#shipToStreet2").html(data.PAYMENTREQUEST_0_SHIPTOSTREET2);
+						$("#shipToCity").html(data.PAYMENTREQUEST_0_SHIPTOCITY);
+						$("#shipToState").html(data.PAYMENTREQUEST_0_SHIPTOCOUNTRYCODE);
+						$("#shipToZip").html(data.PAYMENTREQUEST_0_SHIPTOZIP);
+						$("#transactionId").html(data.PAYMENTREQUEST_0_TRANSACTIONID);
+						$("#totalAmt").html(data.PAYMENTREQUEST_0_AMT);
+						$("#amt").html(data.PAYMENTREQUEST_0_AMT);
+						$("#currencyCode").html(data.CURRENCYCODE);
+						$("#paymentStatus").html(data.ACK);
+						
+						$(".loader").hide();
+						$("#show_transactions").show()
+						totalamt = data.PAYMENTREQUEST_0_AMT;
+						pr_shipamt = data.PAYMENTREQUEST_0_SHIPPINGAMT;
+						currencycode = data.PAYMENTREQUEST_0_CURRENCYCODE;
+						itemamt = data.PAYMENTREQUEST_0_ITEMAMT;
+						qty0 = data.L_PAYMENTREQUEST_0_QTY0;
+						amt0 = data.PAYMENTREQUEST_0_ITEMAMT;
+						handamt = data.PAYMENTREQUEST_0_HANDLINGAMT;
+						shipdiscamt = data.PAYMENTREQUEST_0_SHIPDISCAMT;
+						insuranceamt = data.PAYMENTREQUEST_0_INSURANCEAMT;
+						tax = data.PAYMENTREQUEST_0_TAXAMT;
+					}
+				});
+				
+				
+				
+				
+				$("#confirm").click(function(){
+					$("#loader").show()
+					var shipamt = $("#shipping_method option:selected").val();
+					var newtotal = parseFloat(totalamt) + parseFloat(shipamt) - parseFloat(pr_shipamt);
+					var params = {
+						id : query('id'),
+						payerID : query('payerID'),
+						amt : newtotal,
+						cc: currencycode,
+						ship_amt: shipamt,
+						item_amt: itemamt,
+						qty_0: qty0,
+						amt_0: amt0,
+						insurance_amt: insuranceamt,
+						shipdisc_amt : shipdiscamt,
+						tax_amt: tax,
+						hand_amt: handamt
+					};
+					
+					//alert(params.ship_amt);
+					
+					$.post("./executePayment",params,function(data){
+						var json = JSON.parse(data);
+						console.log(json);
+						if(json.status=="Success"||json.status=="SuccessWithWarning"){
+							window.location.href="success.html?id="+ encodeURIComponent(json.paymentID);
+						}
+						else {
+							if(json.ACK=="Failure" && json.L_ERRORCODE0==10486)
+								window.location.href="https://www.sandbox.paypal.com/checkoutnow?locale.x=en_US&version=4&env=sandbox&token="+encodeURIComponent(json.paymentID)+"&xcomponent=1";
+							else
+								alert(L_LONGMESSAGE0);
+						}
+					});
+				});
+				
+			});
+		</script> 
+	</body>
+	</html>
