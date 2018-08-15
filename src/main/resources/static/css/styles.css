@@ -1,0 +1,62 @@
+@charset "UTF-8";
+
+body {
+  margin: 0;
+}
+
+/* Disable ugly boxes around images in IE10 */
+a img{
+  border: 0px;
+}
+.header-menu ul{ 
+margin: 0; 
+padding: 0; 
+list-style: none; 
+}
+.header-menu li{ 
+display: inline; 
+padding: 0; 
+margin: 0; 
+}
+.header-menu li a{
+display: block; 
+border-top: 1px solid #9F99A3;
+border-left: 1px solid #9F99A3;
+border-right: 1px solid #9F99A3;
+background-color: #EEEEEE;
+padding: 3px 10px;
+text-decoration: none;
+color: #333;
+width: 150px; 
+margin: 0px;
+text-align: left;
+font-size: 14px;
+}
+.header-menu li a:hover{
+border-top: 1px solid #8593A9;
+border-left: 1px solid #8593A9;
+border-right: 1px solid #8593A9;
+background-color: #9EB7DD;
+}
+.header-menu #shita li a{
+display: block; 
+border-left: 1px solid #9F99A3;
+border-right: 1px solid #9F99A3;
+border-bottom: 1px solid #9F99A3;
+background-color: #EEEEEE;
+padding:padding: 3px 10px;
+text-decoration: none;
+color: #333;
+width: 150px; 
+margin: 0px;
+text-align: left;
+font-size: 14px;
+}
+.header-menu li a:hover{
+border-left: 1px solid #8593A9;
+border-right: 1px solid #8593A9;
+border-bottom: 1px solid #8593A9;
+background-color: #9EB7DD;
+}
+
+
