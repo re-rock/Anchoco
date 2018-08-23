@@ -6,29 +6,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Anchoco</title>
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/ress/dist/ress.min.css">
-    <!-- リセットCSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
-        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/styles.css" th:href="@{/css/styles.css}">
-
 </head>
-
 <body>
-    <div class='container'>
-        <div class="header">
-            <div class="header-menu">
-                <ul>
-                    <li>
-                        <a href="#">学習セット</a>
-                    </li>
-                    <li>
-                        <a href="#">設定</a>
-                    </li>
-                </ul>
-            </div>
-        </div><!-- header -->
+  <div class="container">
+    <!-- - - - - - - - ヘッダー  - - - - - - - - -->
+    <header>
+      <img class="header_logo" src="img/header_logo.svg" alt="logo">
+      <h1><p>Anchoco</p></h1>
+      <ul>
+        <li id="name">ようこそゲストさん！</li>
+        <li><a href="http://google.com">新規登録</a></li>
+        <li><a href="http://google.com">ログイン</a></li>
+      </ul>
+    </header>
+    <div class="contents-container">
+        <!-- - - - - サイドメニュー - - - - - -->
+        <div class="side-menu">
+            <ul>
+                <li class="li-side-menu"><a href="">TOP</a></li>
+                <li class="li-side-menu"><a href="">アクティビティ</a></li>
+                <li class="li-side-menu"><a href="">掲示板</a></li>
+                <li class="li-side-menu"><a href="">設定</a></li>
+                <li class="li-side-menu-last">フォルダ</li>
+                <li class="li-folder"><a href="">ピザハット</a></li>
+                <li class="li-folder"><a href="">英語</a></li>
+                <li class="li-folder"><a href="">IT用語</a></li>
+            </ul>
+        </div><!-- side-menu -->
+        </div><!-- contents-container -->
     </div><!-- container -->
-    <!-- <div th:insert="~{flg_header :: header}"></div> -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
