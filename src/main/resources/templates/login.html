@@ -1,21 +1,37 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="UTF-8" />
-<title>Anchoco</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Anchoco-Login</title>
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/ress/dist/ress.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/login.css" th:href="@{/css/login.css}">
 </head>
-<body>
+
 <body>
     <div class="container">
-        <h1>Anchoco</h1>
-        <div id="paypal-button-container"></div>
-        <form role="form" method="post" id="loign-form" class="login-form" action="./top.html" th:action="@{/top}">
-            <label for="input-name">Name:</label>
-            <input id="input-name" type="text" required="required" placeholder="type your name">
-            <label for="input-password">Password:</label>
-            <input id="input-password" type="password" required="required" placeholder="type yotu password">
-            <input type="submit" value="LOGIN">
-        </form>
+        <h1 class="login-title"><p>Anchoco</p></h1>
+        <div class="form-container">
+            <form role="form" method="post" id="loign-form" action="./top.html" th:action="@{/top}">
+                <div class="from-group">
+                <div>
+                    <label for="input-name">Name:</label>
+                    <input id="input-name" class="form-control" type="text" required="required" placeholder="type your name">
+                </div>
+                <div>
+                    <label for="input-password">Password:</label>
+                    <input id="input-password" class="form-control" type="password" required="required" placeholder="type your password">
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-primary" value="LOGIN">Login</button>
+                </div>
+            </div>
+            </form>
+        </div>
     </div>
 </body>
+
 </html>
